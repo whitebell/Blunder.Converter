@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Interop;
+using System.Windows.Threading;
 using log4net;
 using ShogiCore.Notation;
 using DataFormats = System.Windows.DataFormats;
@@ -207,7 +208,7 @@ namespace ShogiCore.Converter
             logger.Debug(msg);
             textBoxLog.AppendText(DateTime.Now.ToString("[yyyy/MM/dd HH:mm:ss.fff] ") + msg + Environment.NewLine);
             textBoxLog.ScrollToEnd();
-            textBoxLog.Dispatcher.Invoke(new Action(() => { }), System.Windows.Threading.DispatcherPriority.Render);
+            textBoxLog.Dispatcher.Invoke(() => { }, DispatcherPriority.Render);
         }
 
         private void radioButtonCombine_Checked(object sender, RoutedEventArgs e)
