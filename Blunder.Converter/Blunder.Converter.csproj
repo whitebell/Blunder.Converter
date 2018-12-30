@@ -99,7 +99,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="..\..\ShogiCore\icon1.ico">
+    <Resource Include="..\ShogiCore\icon1.ico">
       <Link>icon1.ico</Link>
     </Resource>
   </ItemGroup>
