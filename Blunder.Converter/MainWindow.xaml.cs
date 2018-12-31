@@ -62,6 +62,12 @@ namespace ShogiCore.Converter
 
         private void textBoxSrc_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (String.IsNullOrWhiteSpace(textBoxSrc.Text))
+            {
+                textBoxDst.Text = "";
+                return;
+            }
+
             string path = Path.GetFullPath(textBoxSrc.Text);
             if (textBoxSrc.Text != path)
             {
