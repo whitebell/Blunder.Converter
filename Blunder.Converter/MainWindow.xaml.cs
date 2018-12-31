@@ -76,12 +76,20 @@ namespace ShogiCore.Converter
                 textBoxSrc.Text = srcPath;
             }
 
-            string fullPath = Path.GetFullPath(srcPath);
-            if (srcPath != fullPath)
+            try
             {
-                textBoxSrc.Text = fullPath;
+                string fullPath = Path.GetFullPath(srcPath);
+                if (srcPath != fullPath)
+                {
+                    textBoxSrc.Text = fullPath;
+                }
+                textBoxDst.Text = fullPath + "_変換先" + (radioButtonCombine.IsChecked.Value ? GetSaveExtension() : "");
             }
-            textBoxDst.Text = fullPath + "_変換先" + (radioButtonCombine.IsChecked.Value ? GetSaveExtension() : "");
+            catch (Exception ex)
+            {
+                logger.Warn($"変換先フォルダ取得失敗: {srcPath}", ex);
+                WriteLog($"{srcPath}: 変換先フォルダ取得失敗（{ex.Message}）");
+            }
         }
 
         /// <summary>
