@@ -62,18 +62,26 @@ namespace ShogiCore.Converter
 
         private void textBoxSrc_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(textBoxSrc.Text))
+            var srcPath = textBoxSrc.Text;
+
+            if (String.IsNullOrWhiteSpace(srcPath))
             {
                 textBoxDst.Text = "";
                 return;
             }
 
-            string path = Path.GetFullPath(textBoxSrc.Text);
-            if (textBoxSrc.Text != path)
+            if (srcPath.StartsWith("\"") && srcPath.EndsWith("\""))
             {
-                textBoxSrc.Text = path;
+                srcPath = srcPath.Trim('"');
+                textBoxSrc.Text = srcPath;
             }
-            textBoxDst.Text = path + "_変換先" + (radioButtonCombine.IsChecked.Value ? GetSaveExtension() : "");
+
+            string fullPath = Path.GetFullPath(srcPath);
+            if (srcPath != fullPath)
+            {
+                textBoxSrc.Text = fullPath;
+            }
+            textBoxDst.Text = fullPath + "_変換先" + (radioButtonCombine.IsChecked.Value ? GetSaveExtension() : "");
         }
 
         /// <summary>
